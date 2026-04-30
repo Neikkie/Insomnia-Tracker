@@ -1,6 +1,6 @@
 //
 //  Insomnia_TrackerApp.swift
-//  Insomnia Tracker
+//  Insomnia Trac
 //
 //  Created by Shanique Beckford on 4/29/26.
 //

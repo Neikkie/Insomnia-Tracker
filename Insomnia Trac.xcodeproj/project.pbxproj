@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		6D001A032FA1C2D800159119 /* Insomnia Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Insomnia Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D001A032FA1C2D800159119 /* Insomnia Trac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Insomnia Trac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -40,7 +40,7 @@
 		6D001A042FA1C2D800159119 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6D001A032FA1C2D800159119 /* Insomnia Tracker.app */,
+				6D001A032FA1C2D800159119 /* Insomnia Trac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6D001A022FA1C2D800159119 /* Insomnia Tracker */ = {
+		6D001A022FA1C2D800159119 /* Insomnia Trac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6D001A0E2FA1C2D900159119 /* Build configuration list for PBXNativeTarget "Insomnia Tracker" */;
+			buildConfigurationList = 6D001A0E2FA1C2D900159119 /* Build configuration list for PBXNativeTarget "Insomnia Trac" */;
 			buildPhases = (
 				6D0019FF2FA1C2D800159119 /* Sources */,
 				6D001A002FA1C2D800159119 /* Frameworks */,
@@ -63,11 +63,11 @@
 			fileSystemSynchronizedGroups = (
 				6D001A052FA1C2D800159119 /* Insomnia Tracker */,
 			);
-			name = "Insomnia Tracker";
+			name = "Insomnia Trac";
 			packageProductDependencies = (
 			);
-			productName = "Insomnia Tracker";
-			productReference = 6D001A032FA1C2D800159119 /* Insomnia Tracker.app */;
+			productName = "Insomnia Trac";
+			productReference = 6D001A032FA1C2D800159119 /* Insomnia Trac.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6D0019FE2FA1C2D800159119 /* Build configuration list for PBXProject "Insomnia Tracker" */;
+			buildConfigurationList = 6D0019FE2FA1C2D800159119 /* Build configuration list for PBXProject "Insomnia Trac" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6D001A022FA1C2D800159119 /* Insomnia Tracker */,
+				6D001A022FA1C2D800159119 /* Insomnia Trac */,
 			);
 		};
 /* End PBXProject section */
@@ -178,7 +178,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -236,7 +236,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -256,6 +256,8 @@
 				DEVELOPMENT_TEAM = JBF268KK9R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Insomnia Trac";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -288,6 +290,8 @@
 				DEVELOPMENT_TEAM = JBF268KK9R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Insomnia Trac";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -313,7 +317,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6D0019FE2FA1C2D800159119 /* Build configuration list for PBXProject "Insomnia Tracker" */ = {
+		6D0019FE2FA1C2D800159119 /* Build configuration list for PBXProject "Insomnia Trac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6D001A0C2FA1C2D900159119 /* Debug */,
@@ -322,7 +326,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6D001A0E2FA1C2D900159119 /* Build configuration list for PBXNativeTarget "Insomnia Tracker" */ = {
+		6D001A0E2FA1C2D900159119 /* Build configuration list for PBXNativeTarget "Insomnia Trac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6D001A0F2FA1C2D900159119 /* Debug */,
