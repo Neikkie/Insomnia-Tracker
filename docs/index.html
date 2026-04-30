@@ -3,104 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insomnia Trac | Sleep Tracking With Private AI Guidance</title>
-    <meta name="description" content="Insomnia Trac helps users log sleep, spot patterns, and get calm on-device AI guidance in a polished iPhone experience.">
+    <title>Insomnia Trac | Home</title>
+    <meta name="description" content="Insomnia Trac is a sleep wellness app that helps users log sleep, review patterns, and access private on-device AI guidance.">
     <style>
         :root {
             --bg-top: #07112b;
             --bg-bottom: #140c2d;
-            --panel: rgba(17, 24, 52, 0.72);
-            --panel-strong: rgba(24, 32, 68, 0.88);
+            --panel: rgba(17, 24, 52, 0.78);
+            --panel-strong: rgba(24, 32, 68, 0.9);
             --line: rgba(255, 255, 255, 0.09);
             --text: #f4f2ff;
             --muted: #c7c3e0;
             --accent: #b894ff;
             --accent-soft: #e7dcff;
             --glow: #f7e7bc;
-            --mint: #8bdcc1;
             --shadow: 0 28px 60px rgba(3, 7, 18, 0.42);
             --radius-xl: 32px;
             --radius-lg: 22px;
-            --radius-md: 16px;
-            --max-width: 1180px;
         }
 
         * {
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
             margin: 0;
-            font-family: "Avenir Next", "Nunito Sans", "Trebuchet MS", sans-serif;
+            font-family: "Avenir Next", "Nunito Sans", sans-serif;
             color: var(--text);
             background:
                 radial-gradient(circle at 15% 15%, rgba(247, 231, 188, 0.12), transparent 26%),
                 radial-gradient(circle at 82% 24%, rgba(184, 148, 255, 0.18), transparent 28%),
-                radial-gradient(circle at 68% 78%, rgba(139, 220, 193, 0.10), transparent 22%),
                 linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        body::before,
-        body::after {
-            content: "";
-            position: fixed;
-            inset: auto;
-            width: 30rem;
-            height: 30rem;
-            border-radius: 999px;
-            filter: blur(72px);
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.32;
-            animation: drift 15s ease-in-out infinite alternate;
-        }
-
-        body::before {
-            top: -8rem;
-            left: -8rem;
-            background: rgba(184, 148, 255, 0.24);
-        }
-
-        body::after {
-            right: -10rem;
-            bottom: -10rem;
-            background: rgba(247, 231, 188, 0.18);
-            animation-duration: 18s;
-        }
-
-        @keyframes drift {
-            from {
-                transform: translate3d(0, 0, 0) scale(0.96);
-            }
-            to {
-                transform: translate3d(1.6rem, -1.2rem, 0) scale(1.05);
-            }
-        }
-
-        @keyframes float {
-            from {
-                transform: translateY(0);
-            }
-            to {
-                transform: translateY(-8px);
-            }
-        }
-
-        @keyframes pulse {
-            from {
-                opacity: 0.65;
-                transform: scale(0.98);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1.03);
-            }
         }
 
         a {
@@ -108,21 +42,17 @@
             text-decoration: none;
         }
 
-        .page {
-            position: relative;
-            z-index: 1;
-        }
-
         .container {
-            width: min(var(--max-width), calc(100% - 2rem));
+            width: min(1100px, calc(100% - 2rem));
             margin: 0 auto;
         }
 
         .topbar {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 1.2rem 0 0.5rem;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 0 0.75rem;
         }
 
         .brand {
@@ -138,16 +68,14 @@
             background:
                 radial-gradient(circle at 35% 30%, rgba(247, 231, 188, 0.95), transparent 25%),
                 linear-gradient(160deg, #3b2c78, #121b50 56%, #07112b);
-            box-shadow: 0 12px 24px rgba(5, 8, 18, 0.35);
             position: relative;
-            overflow: hidden;
         }
 
         .brand-mark::after {
             content: "✦";
             position: absolute;
-            right: 0.5rem;
             top: 0.45rem;
+            right: 0.5rem;
             font-size: 0.85rem;
             color: rgba(255, 255, 255, 0.85);
         }
@@ -155,80 +83,86 @@
         .brand-copy small {
             display: block;
             color: var(--muted);
-            letter-spacing: 0.08em;
             text-transform: uppercase;
+            letter-spacing: 0.08em;
             font-size: 0.7rem;
         }
 
         .brand-copy strong {
-            font-family: "Avenir Next Condensed", "Avenir Next", sans-serif;
             font-size: 1.15rem;
-            letter-spacing: 0.02em;
+        }
+
+        .site-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        .site-nav a {
+            padding: 0.62rem 0.95rem;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .site-nav a.active {
+            color: var(--text);
+            border-color: rgba(255, 255, 255, 0.18);
         }
 
         .hero {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
-            gap: 2rem;
+            gap: 1.5rem;
             align-items: center;
-            padding: 3rem 0 2rem;
+            padding: 2.8rem 0 2rem;
         }
 
         .eyebrow {
             display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
             padding: 0.45rem 0.8rem;
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.06);
             border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.06);
             color: var(--accent-soft);
             font-size: 0.84rem;
-            margin-bottom: 1rem;
         }
 
         h1 {
-            margin: 0;
-            font-family: "Avenir Next Condensed", "Avenir Next", sans-serif;
-            font-size: clamp(2.8rem, 6vw, 5rem);
+            margin: 1rem 0 0;
+            font-size: clamp(2.7rem, 6vw, 4.8rem);
             line-height: 0.95;
             letter-spacing: -0.05em;
         }
 
-        .hero p {
-            margin: 1.1rem 0 0;
-            max-width: 36rem;
+        .lead {
+            margin-top: 1rem;
             color: var(--muted);
-            font-size: 1.05rem;
-            line-height: 1.7;
+            line-height: 1.75;
+            max-width: 40rem;
         }
 
         .hero-actions {
             display: flex;
             flex-wrap: wrap;
             gap: 0.9rem;
-            margin-top: 1.6rem;
+            margin-top: 1.5rem;
         }
 
         .button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.6rem;
             padding: 0.95rem 1.2rem;
             border-radius: 999px;
             font-weight: 700;
-            transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
-        }
-
-        .button:hover {
-            transform: translateY(-2px);
         }
 
         .button-primary {
             background: linear-gradient(135deg, #c2a6ff, #9f78ff);
             color: #120b25;
-            box-shadow: 0 16px 28px rgba(159, 120, 255, 0.28);
         }
 
         .button-secondary {
@@ -237,177 +171,95 @@
             color: var(--text);
         }
 
-        .button-muted {
-            opacity: 0.72;
-            cursor: default;
-        }
-
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 0.85rem;
-            margin-top: 1.6rem;
-        }
-
-        .stat {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--line);
-            border-radius: 18px;
-            padding: 1rem;
-        }
-
-        .stat strong {
-            display: block;
-            font-size: 1.4rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .stat span {
-            color: var(--muted);
-            font-size: 0.9rem;
-        }
-
-        .device-panel {
-            display: flex;
-            justify-content: center;
-        }
-
         .device {
-            width: min(100%, 24rem);
             padding: 0.8rem;
             border-radius: 42px;
             background: linear-gradient(180deg, #0a1028, #040711);
             box-shadow: var(--shadow);
-            animation: float 4.5s ease-in-out infinite alternate;
+            width: min(100%, 23rem);
+            margin-left: auto;
         }
 
         .screen {
-            position: relative;
-            overflow: hidden;
             border-radius: 34px;
-            min-height: 44rem;
+            padding: 1.15rem;
+            min-height: 41rem;
             background:
                 radial-gradient(circle at 22% 18%, rgba(247, 231, 188, 0.10), transparent 16%),
                 radial-gradient(circle at 78% 30%, rgba(184, 148, 255, 0.18), transparent 22%),
                 linear-gradient(180deg, #07112b, #111b43 48%, #1b1240);
-            padding: 1.15rem;
-        }
-
-        .screen::before {
-            content: "";
-            position: absolute;
-            top: 0.75rem;
-            left: 50%;
-            width: 7rem;
-            height: 1.6rem;
-            border-radius: 999px;
-            transform: translateX(-50%);
-            background: rgba(4, 6, 16, 0.92);
         }
 
         .status {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-top: 2rem;
             color: rgba(255, 255, 255, 0.86);
             font-size: 0.85rem;
+            margin-top: 1.8rem;
             padding: 0 0.35rem;
         }
 
-        .app-shell {
-            margin-top: 1rem;
-        }
-
         .hero-card,
-        .glass-card,
-        .mini-card {
+        .mini-card,
+        .glass-card {
             border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
             background: rgba(19, 28, 61, 0.68);
+            backdrop-filter: blur(12px);
         }
 
         .hero-card {
+            margin-top: 1rem;
             border-radius: 28px;
             padding: 1.1rem;
             background: linear-gradient(160deg, rgba(60, 49, 126, 0.9), rgba(22, 37, 88, 0.82));
         }
 
-        .hero-card .capsule-row {
-            display: flex;
-            gap: 0.6rem;
+        .capsule-row,
+        .mini-grid {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .capsule-row {
+            grid-template-columns: repeat(3, 1fr);
             margin-top: 0.9rem;
         }
 
-        .capsule {
-            flex: 1;
+        .capsule,
+        .mini-card {
             border-radius: 16px;
-            padding: 0.75rem;
+            padding: 0.8rem;
             background: rgba(255, 255, 255, 0.08);
             font-size: 0.82rem;
         }
 
-        .capsule strong {
+        .capsule strong,
+        .mini-card strong {
             display: block;
-            margin-top: 0.2rem;
+            margin-top: 0.25rem;
             font-size: 1rem;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 0.8rem;
+        .mini-grid {
+            grid-template-columns: repeat(2, 1fr);
             margin-top: 0.9rem;
-        }
-
-        .mini-card {
-            border-radius: 18px;
-            padding: 0.85rem;
-        }
-
-        .mini-card small,
-        .glass-card small {
-            color: rgba(231, 220, 255, 0.78);
-            display: block;
-            margin-bottom: 0.3rem;
-        }
-
-        .mini-card strong {
-            font-size: 1.05rem;
         }
 
         .glass-card {
+            margin-top: 0.9rem;
             border-radius: 22px;
             padding: 1rem;
-            margin-top: 0.9rem;
         }
 
         .chart {
             margin-top: 0.85rem;
             height: 10rem;
             border-radius: 18px;
+            position: relative;
+            overflow: hidden;
             background:
                 linear-gradient(180deg, rgba(184, 148, 255, 0.18), rgba(184, 148, 255, 0.02)),
                 rgba(255, 255, 255, 0.03);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .chart::before,
-        .chart::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            border-top: 1px dashed rgba(247, 231, 188, 0.3);
-        }
-
-        .chart::before {
-            top: 30%;
-        }
-
-        .chart::after {
-            top: 56%;
         }
 
         .chart svg {
@@ -417,230 +269,89 @@
             height: 100%;
         }
 
-        .coach {
+        .content-grid {
             display: grid;
-            gap: 0.6rem;
-        }
-
-        .coach-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            font-size: 0.8rem;
-            color: var(--glow);
-        }
-
-        section {
-            padding: 2rem 0;
-        }
-
-        .section-heading {
-            max-width: 38rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .section-heading h2 {
-            margin: 0;
-            font-family: "Avenir Next Condensed", "Avenir Next", sans-serif;
-            font-size: clamp(2rem, 4vw, 3.1rem);
-            letter-spacing: -0.04em;
-        }
-
-        .section-heading p {
-            margin: 0.8rem 0 0;
-            color: var(--muted);
-            line-height: 1.75;
-        }
-
-        .feature-grid,
-        .story-grid,
-        .showcase-grid {
-            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
-        }
-
-        .feature-grid {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
-
-        .story-grid {
-            grid-template-columns: 1.2fr 0.8fr;
-            align-items: start;
-        }
-
-        .showcase-grid {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            padding: 0.5rem 0 2rem;
         }
 
         .card {
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--line);
             background: var(--panel);
-            backdrop-filter: blur(14px);
-            padding: 1.25rem;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            padding: 1.35rem;
             box-shadow: var(--shadow);
         }
 
+        .card h2,
         .card h3 {
-            margin: 0.2rem 0 0.65rem;
-            font-size: 1.2rem;
+            margin-top: 0;
         }
 
         .card p,
         .card li {
             color: var(--muted);
-            line-height: 1.7;
+            line-height: 1.75;
         }
 
-        .icon-chip {
-            width: 2.8rem;
-            height: 2.8rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 18px;
-            margin-bottom: 0.9rem;
-            background: rgba(184, 148, 255, 0.15);
-            color: var(--glow);
-            font-size: 1.2rem;
-        }
-
-        .story-points {
+        .link-list {
             display: grid;
-            gap: 0.9rem;
+            gap: 0.8rem;
             padding-left: 0;
             list-style: none;
             margin: 0;
         }
 
-        .story-points li {
-            padding: 1rem;
-            border-radius: 18px;
-            background: rgba(255, 255, 255, 0.04);
+        .link-list a {
+            display: block;
+            padding: 0.95rem 1rem;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .mockup-card {
-            min-height: 18rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            background:
-                radial-gradient(circle at top right, rgba(184, 148, 255, 0.14), transparent 35%),
-                var(--panel-strong);
-        }
-
-        .mockup-card h3 {
-            font-family: "Avenir Next Condensed", "Avenir Next", sans-serif;
-            font-size: 1.55rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .mockup-lines {
-            display: grid;
-            gap: 0.55rem;
-            margin-top: 1.1rem;
-        }
-
-        .line {
-            height: 0.7rem;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.07);
-        }
-
-        .line.short {
-            width: 54%;
-        }
-
-        .line.medium {
-            width: 76%;
-        }
-
-        .line.long {
-            width: 100%;
-        }
-
-        .bottom-panel {
-            margin-top: 1rem;
-            display: flex;
-            gap: 0.7rem;
-        }
-
-        .bottom-pill {
-            flex: 1;
-            padding: 0.8rem;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.07);
-        }
-
-        .cta-panel {
-            display: grid;
-            gap: 1.1rem;
-            align-items: center;
-            grid-template-columns: 1.2fr 0.8fr;
-            padding: 1.5rem;
-            border-radius: var(--radius-xl);
-            border: 1px solid var(--line);
-            background:
-                linear-gradient(135deg, rgba(40, 30, 92, 0.9), rgba(15, 23, 53, 0.85));
-            box-shadow: var(--shadow);
-        }
-
-        .cta-panel h2 {
-            margin: 0;
-            font-size: clamp(2rem, 3.8vw, 3rem);
-            font-family: "Avenir Next Condensed", "Avenir Next", sans-serif;
-        }
-
-        .cta-panel p {
-            margin: 0.85rem 0 0;
-            color: var(--muted);
-            line-height: 1.7;
-        }
-
         footer {
-            padding: 2rem 0 3rem;
-            color: rgba(255, 255, 255, 0.55);
-            font-size: 0.92rem;
+            padding: 1rem 0 2.5rem;
+            color: rgba(255, 255, 255, 0.58);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+            margin-top: 0.75rem;
         }
 
         @media (max-width: 980px) {
+            .topbar,
             .hero,
-            .story-grid,
-            .cta-panel,
-            .feature-grid,
-            .showcase-grid {
+            .content-grid {
                 grid-template-columns: 1fr;
+                flex-direction: column;
+                align-items: flex-start;
             }
 
             .device {
-                width: min(100%, 22rem);
-            }
-
-            .hero {
-                padding-top: 2rem;
-            }
-
-            .hero-stats {
-                grid-template-columns: 1fr;
+                margin-left: 0;
             }
         }
 
         @media (max-width: 640px) {
             .container {
-                width: min(100% - 1.25rem, var(--max-width));
+                width: min(100% - 1.25rem, 1100px);
             }
 
-            .topbar {
-                padding-top: 1rem;
-            }
-
-            .screen {
-                min-height: 39rem;
-            }
-
-            .hero-actions {
+            .site-nav,
+            .hero-actions,
+            .footer-links {
                 flex-direction: column;
+                align-items: stretch;
+            }
+
+            .capsule-row,
+            .mini-grid {
+                grid-template-columns: 1fr;
             }
 
             .button {
@@ -650,238 +361,127 @@
     </style>
 </head>
 <body>
-    <div class="page">
-        <header class="container">
-            <div class="topbar">
-                <a class="brand" href="#top">
-                    <div class="brand-mark" aria-hidden="true"></div>
-                    <div class="brand-copy">
-                        <small>Handshake AI Showcase</small>
-                        <strong>Insomnia Trac</strong>
-                    </div>
-                </a>
-            </div>
-
-            <div class="hero" id="top">
-                <div>
-                    <div class="eyebrow">Private on-device AI • Sleep wellness experience</div>
-                    <h1>Track the night. Understand the pattern.</h1>
-                    <p>Insomnia Trac helps users log sleep, spot trends, and receive calm on-device guidance through a polished iPhone experience built around privacy, clarity, and repeatable daily use.</p>
-
-                    <div class="hero-actions">
-                        <a class="button button-primary" href="#showcase">View the Product</a>
-                        <a class="button button-secondary button-muted" href="#">GitHub Link Placeholder</a>
-                        <a class="button button-secondary" href="https://testflight.apple.com/join/ceAC2FVG" target="_blank" rel="noreferrer">Open TestFlight</a>
-                    </div>
-
-                    <div class="hero-stats">
-                        <div class="stat">
-                            <strong>On-device AI</strong>
-                            <span>Weekly summaries powered by Apple Intelligence.</span>
-                        </div>
-                        <div class="stat">
-                            <strong>Guided logging</strong>
-                            <span>Track sleep, routines, mood, and habits quickly.</span>
-                        </div>
-                        <div class="stat">
-                            <strong>Competition-ready</strong>
-                            <span>Onboarding, history, insights, and polished visuals.</span>
-                        </div>
-                    </div>
+    <div class="container">
+        <header class="topbar">
+            <a class="brand" href="./index.html">
+                <div class="brand-mark" aria-hidden="true"></div>
+                <div class="brand-copy">
+                    <small>Sleep wellness app</small>
+                    <strong>Insomnia Trac</strong>
                 </div>
-
-                <div class="device-panel">
-                    <div class="device" aria-label="Insomnia Trac overview mockup">
-                        <div class="screen">
-                            <div class="status">
-                                <span>9:41</span>
-                                <span>5G • 100%</span>
-                            </div>
-
-                            <div class="app-shell">
-                                <div class="hero-card">
-                                    <small>Your sleep snapshot</small>
-                                    <strong style="display:block;font-size:1.7rem;line-height:1.05;">Your sleep is in a healthy range</strong>
-                                    <div class="capsule-row">
-                                        <div class="capsule">7-day avg<strong>7.4h</strong></div>
-                                        <div class="capsule">Score<strong>2.1 / 5</strong></div>
-                                        <div class="capsule">Logs<strong>7</strong></div>
-                                    </div>
-                                </div>
-
-                                <div class="grid">
-                                    <div class="mini-card">
-                                        <small>Average Sleep</small>
-                                        <strong>7.4h</strong>
-                                    </div>
-                                    <div class="mini-card">
-                                        <small>Morning Energy</small>
-                                        <strong>3.7 / 5</strong>
-                                    </div>
-                                </div>
-
-                                <div class="glass-card">
-                                    <small>Sleep History</small>
-                                    <div class="chart">
-                                        <svg viewBox="0 0 320 160" preserveAspectRatio="none" aria-hidden="true">
-                                            <defs>
-                                                <linearGradient id="areaFade" x1="0" x2="0" y1="0" y2="1">
-                                                    <stop offset="0%" stop-color="rgba(184,148,255,0.8)"></stop>
-                                                    <stop offset="100%" stop-color="rgba(184,148,255,0.02)"></stop>
-                                                </linearGradient>
-                                            </defs>
-                                            <path d="M0,118 C32,110 56,92 88,96 C120,100 142,56 176,62 C208,68 236,124 268,104 C288,90 304,70 320,76 L320,160 L0,160 Z" fill="url(#areaFade)"></path>
-                                            <path d="M0,118 C32,110 56,92 88,96 C120,100 142,56 176,62 C208,68 236,124 268,104 C288,90 304,70 320,76" fill="none" stroke="#f3edff" stroke-width="4" stroke-linecap="round"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-
-                                <div class="glass-card coach">
-                                    <div class="coach-badge">✦ Apple Intelligence Sleep Coach</div>
-                                    <strong>Weekly AI Summary</strong>
-                                    <span style="color:var(--muted);line-height:1.55;">Your strongest nights followed steadier bedtimes and lower caffeine. Keep protecting that earlier sleep window this week.</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </a>
+            <nav class="site-nav" aria-label="Primary">
+                <a class="active" href="./index.html">Home</a>
+                <a href="./app.html">Web App</a>
+                <a href="./about.html">About</a>
+                <a href="./privacy-policy.html">Privacy Policy</a>
+                <a href="./usage.html">Usage</a>
+                <a href="./terms-and-conditions.html">Terms & Conditions</a>
+            </nav>
         </header>
 
-        <main>
-            <section class="container">
-                <div class="section-heading">
-                    <h2>Why it stands out</h2>
-                    <p>This isn’t just a sleep tracker. It’s a calmer, more interpretable sleep experience that helps users connect their routines to the quality of their rest.</p>
+        <section class="hero">
+            <div>
+                <div class="eyebrow">Private on-device AI • Sleep wellness experience</div>
+                <h1>Welcome to Insomnia Trac.</h1>
+                <p class="lead">Insomnia Trac is a sleep wellness app that helps users log sleep, review patterns, and access calm on-device guidance through a simple, polished iPhone experience.</p>
+
+                <div class="hero-actions">
+                    <a class="button button-primary" href="./app.html">Launch Web App</a>
+                    <a class="button button-secondary" href="./about.html">Learn More</a>
                 </div>
+            </div>
 
-                <div class="feature-grid">
-                    <article class="card">
-                        <div class="icon-chip">☾</div>
-                        <h3>Simple nightly logging</h3>
-                        <p>Users can quickly capture sleep hours, bedtime, wake time, mood, notes, and habits like caffeine, alcohol, water, and late-night eating.</p>
-                    </article>
-
-                    <article class="card">
-                        <div class="icon-chip">✦</div>
-                        <h3>Private AI coaching</h3>
-                        <p>Apple Intelligence generates short weekly summaries on device when available, keeping the experience useful and privacy-forward.</p>
-                    </article>
-
-                    <article class="card">
-                        <div class="icon-chip">↗</div>
-                        <h3>Designed for repeat use</h3>
-                        <p>Onboarding, history, compact logging, reminders, floating actions, and visual trends make the app feel like a polished product, not a demo.</p>
-                    </article>
-                </div>
-            </section>
-
-            <section class="container">
-                <div class="story-grid">
-                    <div class="card">
-                        <div class="section-heading" style="margin-bottom:1rem;">
-                            <h2>The core product story</h2>
-                            <p>Sleep tracking apps often stop at raw logs. Insomnia Trac is built to help users understand what may actually be affecting their rest.</p>
-                        </div>
-
-                        <ul class="story-points">
-                            <li><strong style="display:block;color:var(--text);margin-bottom:0.35rem;">Log the context, not just the outcome.</strong> Sleep hours become more useful when paired with routine signals like caffeine, activity, alcohol, and late-night eating.</li>
-                            <li><strong style="display:block;color:var(--text);margin-bottom:0.35rem;">Turn data into reflection.</strong> Trends, history, and AI summaries help users spot patterns without overwhelming them.</li>
-                            <li><strong style="display:block;color:var(--text);margin-bottom:0.35rem;">Keep the experience calm.</strong> The visual language is intentional, night-sky inspired, and focused on trust rather than noise.</li>
-                        </ul>
+            <div class="device" aria-label="Insomnia Trac app preview">
+                <div class="screen">
+                    <div class="status">
+                        <span>9:41</span>
+                        <span>5G • 100%</span>
                     </div>
 
-                    <aside class="card">
-                        <div class="icon-chip">◎</div>
-                        <h3>Submission notes</h3>
-                        <p>This landing page is designed to support a Handshake AI Showcase submission by making the problem, product, and AI differentiation easy to understand at a glance.</p>
-                        <p style="margin-bottom:0;">Replace the placeholder buttons above with your final GitHub and TestFlight URLs before sharing.</p>
-                    </aside>
-                </div>
-            </section>
-
-            <section class="container" id="showcase">
-                <div class="section-heading">
-                    <h2>Product highlights</h2>
-                    <p>Three parts of the app that matter most in a showcase setting: the guided log, reflective history, and AI-powered sleep coaching.</p>
-                </div>
-
-                <div class="showcase-grid">
-                    <article class="card mockup-card">
-                        <div>
-                            <small style="color:var(--accent-soft);">Log Screen</small>
-                            <h3>Log your nights in seconds</h3>
-                            <p>Compact date selection, habit tracking, and a floating save bar reduce friction for everyday use.</p>
+                    <div class="hero-card">
+                        <small>Your sleep snapshot</small>
+                        <strong style="display:block;font-size:1.7rem;line-height:1.05;">Your sleep is in a healthy range</strong>
+                        <div class="capsule-row">
+                            <div class="capsule">7-day avg<strong>7.4h</strong></div>
+                            <div class="capsule">Score<strong>2.1 / 5</strong></div>
+                            <div class="capsule">Logs<strong>7</strong></div>
                         </div>
-                        <div>
-                            <div class="mockup-lines">
-                                <div class="line medium"></div>
-                                <div class="line long"></div>
-                                <div class="line short"></div>
-                            </div>
-                            <div class="bottom-panel">
-                                <div class="bottom-pill">Bedtime</div>
-                                <div class="bottom-pill">Wake Time</div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="card mockup-card">
-                        <div>
-                            <small style="color:var(--accent-soft);">History Screen</small>
-                            <h3>See the pattern over time</h3>
-                            <p>Review saved nights, compare routines, and edit entries without starting over.</p>
-                        </div>
-                        <div>
-                            <div class="mockup-lines">
-                                <div class="line long"></div>
-                                <div class="line medium"></div>
-                                <div class="line long"></div>
-                            </div>
-                            <div class="bottom-panel">
-                                <div class="bottom-pill">Notes</div>
-                                <div class="bottom-pill">Score</div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="card mockup-card">
-                        <div>
-                            <small style="color:var(--accent-soft);">AI Sleep Coach</small>
-                            <h3>Reflect with private guidance</h3>
-                            <p>Generate a concise weekly summary and one calm next step when enough log data is available.</p>
-                        </div>
-                        <div>
-                            <div class="mockup-lines">
-                                <div class="line short"></div>
-                                <div class="line long"></div>
-                                <div class="line medium"></div>
-                            </div>
-                            <div class="bottom-panel">
-                                <div class="bottom-pill">On-device</div>
-                                <div class="bottom-pill">Privacy-first</div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </section>
-
-            <section class="container">
-                <div class="cta-panel">
-                    <div>
-                        <h2>Ready for your showcase link</h2>
-                        <p>Use this page as the first stop for judges, recruiters, or anyone reviewing the project. It tells the story quickly and gives you clean placeholders for the final TestFlight and GitHub links.</p>
                     </div>
-                    <div class="hero-actions" style="margin-top:0;">
-                        <a class="button button-primary" href="#top">Back to top</a>
-                        <a class="button button-secondary" href="https://testflight.apple.com/join/ceAC2FVG" target="_blank" rel="noreferrer">Open TestFlight</a>
+
+                    <div class="mini-grid">
+                        <div class="mini-card">
+                            <small>Average Sleep</small>
+                            <strong>7.4h</strong>
+                        </div>
+                        <div class="mini-card">
+                            <small>Morning Energy</small>
+                            <strong>3.7 / 5</strong>
+                        </div>
+                    </div>
+
+                    <div class="glass-card">
+                        <small>Sleep History</small>
+                        <div class="chart">
+                            <svg viewBox="0 0 320 160" preserveAspectRatio="none" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="areaFade" x1="0" x2="0" y1="0" y2="1">
+                                        <stop offset="0%" stop-color="rgba(184,148,255,0.8)"></stop>
+                                        <stop offset="100%" stop-color="rgba(184,148,255,0.02)"></stop>
+                                    </linearGradient>
+                                </defs>
+                                <path d="M0,118 C32,110 56,92 88,96 C120,100 142,56 176,62 C208,68 236,124 268,104 C288,90 304,70 320,76 L320,160 L0,160 Z" fill="url(#areaFade)"></path>
+                                <path d="M0,118 C32,110 56,92 88,96 C120,100 142,56 176,62 C208,68 236,124 268,104 C288,90 304,70 320,76" fill="none" stroke="#f3edff" stroke-width="4" stroke-linecap="round"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="glass-card">
+                        <small>Apple Intelligence Sleep Coach</small>
+                        <strong>Weekly AI Summary</strong>
+                        <p style="margin:0.55rem 0 0;color:var(--muted);line-height:1.6;">Your strongest nights followed steadier bedtimes and lower caffeine. Keep protecting that earlier sleep window this week.</p>
                     </div>
                 </div>
-            </section>
-        </main>
+            </div>
+        </section>
 
-        <footer class="container">
+        <section class="content-grid">
+            <article class="card">
+                <h2>What the app does</h2>
+                <p>Insomnia Trac helps users track sleep hours, bedtime, wake time, habits, notes, and how they feel. The app then turns those check-ins into readable trends, history, and lightweight guidance.</p>
+            </article>
+
+            <article class="card">
+                <h2>Quick links</h2>
+                <ul class="link-list">
+                    <li><a href="./app.html">Open the web app</a></li>
+                    <li><a href="./about.html">About the app</a></li>
+                    <li><a href="./privacy-policy.html">Read the privacy policy</a></li>
+                    <li><a href="./usage.html">See how to use Insomnia Trac</a></li>
+                    <li><a href="./terms-and-conditions.html">View the terms and conditions</a></li>
+                </ul>
+            </article>
+
+            <article class="card">
+                <h2>Access</h2>
+                <p>Use the links below to open the web app or move through the rest of the site.</p>
+                <div class="hero-actions" style="margin-top:1rem;">
+                    <a class="button button-secondary" href="./app.html">Open the Web App</a>
+                    <a class="button button-secondary" href="./usage.html">How to Use It</a>
+                </div>
+            </article>
+        </section>
+
+        <footer>
             <div>Insomnia Trac • Sleep wellness tracking with private on-device AI guidance</div>
+            <div class="footer-links">
+                <a href="./index.html">Home</a>
+                <a href="./app.html">Web App</a>
+                <a href="./about.html">About</a>
+                <a href="./privacy-policy.html">Privacy Policy</a>
+                <a href="./usage.html">Usage</a>
+                <a href="./terms-and-conditions.html">Terms & Conditions</a>
+            </div>
         </footer>
     </div>
 </body>

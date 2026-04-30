@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insomnia Trac | Web App</title>
+    <meta name="description" content="A web app version of Insomnia Trac for logging sleep, reviewing patterns, and generating web-based sleep insights.">
+    <link rel="stylesheet" href="./app.css">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="app-topbar">
+            <div class="brand-block">
+                <div class="brand-mark" aria-hidden="true"></div>
+                <div>
+                    <small>Insomnia Trac</small>
+                    <strong>Web App</strong>
+                </div>
+            </div>
+            <nav class="site-links" aria-label="Website">
+                <a href="./index.html">Home</a>
+                <a href="./about.html">About</a>
+                <a href="./privacy-policy.html">Privacy Policy</a>
+                <a href="./usage.html">Usage</a>
+                <a href="./terms-and-conditions.html">Terms</a>
+            </nav>
+        </header>
+
+        <main class="app-layout">
+            <section class="page active" data-page="overview">
+                <div class="page-scroll">
+                    <div class="overview-background">
+                        <span class="star star-a">✦</span>
+                        <span class="star star-b">✧</span>
+                        <span class="star star-c">✦</span>
+                        <span class="orb orb-a"></span>
+                        <span class="orb orb-b"></span>
+                    </div>
+
+                    <section class="hero-card">
+                        <div class="hero-copy">
+                            <p class="eyebrow">Your sleep snapshot</p>
+                            <h1 id="hero-title">Start your first sleep log</h1>
+                            <p id="hero-subtitle">Use the Log tab to add your first entry, then come back here to review your patterns.</p>
+                        </div>
+                        <button class="primary-chip" data-jump-log>Add Sleep Log</button>
+                        <div class="hero-pills">
+                            <article class="summary-pill">
+                                <span>7-day avg</span>
+                                <strong id="pill-avg">--</strong>
+                            </article>
+                            <article class="summary-pill">
+                                <span>Score</span>
+                                <strong id="pill-score">--</strong>
+                            </article>
+                            <article class="summary-pill">
+                                <span>Logs</span>
+                                <strong id="pill-count">0</strong>
+                            </article>
+                        </div>
+                    </section>
+
+                    <section class="metric-grid" id="metric-grid"></section>
+
+                    <section class="glass-card">
+                        <div class="section-heading-row">
+                            <div>
+                                <h2>Sleep History</h2>
+                                <p>A simple trend view of the most recent seven nights.</p>
+                            </div>
+                            <span class="badge">Goal: 7-9h</span>
+                        </div>
+                        <div class="chart-wrap">
+                            <svg id="sleep-chart" viewBox="0 0 320 180" preserveAspectRatio="none" aria-label="Sleep history chart"></svg>
+                        </div>
+                    </section>
+
+                    <section class="glass-card coach-card">
+                        <div class="section-heading-row">
+                            <div>
+                                <h2>Sleep Coach</h2>
+                                <p>Generate a short web-based summary from recent sleep patterns.</p>
+                            </div>
+                            <span class="badge soft">Web insight</span>
+                        </div>
+                        <div id="coach-empty" class="empty-state">
+                            <h3>Need more data first</h3>
+                            <p>Log at least 3 nights to unlock a more useful summary.</p>
+                        </div>
+                        <div id="coach-output" class="coach-output hidden">
+                            <h3 id="coach-headline">Weekly Summary</h3>
+                            <p id="coach-body"></p>
+                        </div>
+                        <div class="coach-actions">
+                            <button class="button button-primary" id="generate-summary">Generate Summary</button>
+                            <button class="button button-secondary" id="load-sample-overview">Load Sample Week</button>
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+            <section class="page" data-page="log">
+                <div class="page-scroll page-scroll-with-action">
+                    <section class="compact-header-card">
+                        <div>
+                            <p class="eyebrow">Nightly check-in</p>
+                            <h2 id="log-title">Sleep basics</h2>
+                            <p id="log-subtitle">Record the core details first, then add extra context only when it matters.</p>
+                        </div>
+                    </section>
+
+                    <form id="sleep-form" class="form-stack">
+                        <section class="glass-card">
+                            <div class="section-heading">
+                                <h2>Sleep basics</h2>
+                                <p>Capture the day, hours, and how you felt in one quick pass.</p>
+                            </div>
+
+                            <div class="field-panel field-inline">
+                                <div class="field-copy">
+                                    <label for="log-date">Selected date</label>
+                                    <strong id="selected-date-label"></strong>
+                                </div>
+                                <input id="log-date" name="date" type="date" required>
+                            </div>
+
+                            <div class="field-group">
+                                <div class="field-inline">
+                                    <label for="sleep-hours">Hours slept</label>
+                                    <strong id="sleep-hours-value">7.5h</strong>
+                                </div>
+                                <input id="sleep-hours" name="sleepHours" type="range" min="0" max="14" step="0.5" value="7.5">
+                                <p class="helper">Recommended range: 7-9 hours</p>
+                            </div>
+
+                            <div class="field-group">
+                                <label for="feeling">How do you feel today?</label>
+                                <select id="feeling" name="feeling">
+                                    <option>Tired</option>
+                                    <option>Anxious</option>
+                                    <option>Energetic</option>
+                                    <option>Calm</option>
+                                </select>
+                            </div>
+                        </section>
+
+                        <section class="glass-card">
+                            <div class="section-heading">
+                                <h2>Sleep window</h2>
+                                <p>Capture when you went to bed and when you woke up.</p>
+                            </div>
+                            <div class="split-grid">
+                                <div class="field-panel">
+                                    <label for="bedtime">Bedtime</label>
+                                    <input id="bedtime" name="bedtime" type="time" required>
+                                </div>
+                                <div class="field-panel">
+                                    <label for="wake-time">Wake time</label>
+                                    <input id="wake-time" name="wakeTime" type="time" required>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="glass-card">
+                            <div class="section-heading">
+                                <h2>Sleep quality</h2>
+                                <p>Use the sliders to rate the night.</p>
+                            </div>
+
+                            <div class="slider-stack">
+                                <div class="slider-row">
+                                    <div class="slider-copy">
+                                        <label for="difficulty">Difficulty falling asleep</label>
+                                        <small id="difficulty-text">Moderate difficulty</small>
+                                    </div>
+                                    <strong id="difficulty-value">3/5</strong>
+                                </div>
+                                <input id="difficulty" name="difficulty" type="range" min="1" max="5" step="1" value="3">
+
+                                <div class="slider-row">
+                                    <div class="slider-copy">
+                                        <label for="wakeups">Nighttime wake-ups</label>
+                                        <small id="wakeups-text">Some wake-ups</small>
+                                    </div>
+                                    <strong id="wakeups-value">2/5</strong>
+                                </div>
+                                <input id="wakeups" name="wakeups" type="range" min="1" max="5" step="1" value="2">
+
+                                <div class="slider-row">
+                                    <div class="slider-copy">
+                                        <label for="energy">Morning energy</label>
+                                        <small id="energy-text">Moderate morning energy</small>
+                                    </div>
+                                    <strong id="energy-value">3/5</strong>
+                                </div>
+                                <input id="energy" name="energy" type="range" min="1" max="5" step="1" value="3">
+                            </div>
+                        </section>
+
+                        <section class="glass-card">
+                            <details id="optional-details" open>
+                                <summary>Routines, habits, and notes</summary>
+                                <div class="details-body">
+                                    <div class="section-heading">
+                                        <h2>Activities</h2>
+                                        <p>Select more than one if needed.</p>
+                                    </div>
+                                    <div id="activity-grid" class="activity-grid"></div>
+
+                                    <div class="field-inline-grid">
+                                        <input id="custom-activity" type="text" placeholder="Add custom activity">
+                                        <button type="button" class="button button-secondary" id="add-custom-activity">Add</button>
+                                    </div>
+
+                                    <div id="selected-activities" class="selected-activities"></div>
+
+                                    <div class="field-group">
+                                        <div class="slider-row">
+                                            <div class="slider-copy">
+                                                <label for="activity-level">Activity level</label>
+                                                <small>How active were you during the day?</small>
+                                            </div>
+                                            <strong id="activity-level-value">3/5</strong>
+                                        </div>
+                                        <input id="activity-level" name="activityLevel" type="range" min="1" max="5" step="1" value="3">
+                                    </div>
+
+                                    <label class="toggle-card">
+                                        <input id="late-night-eating" name="lateNightEating" type="checkbox">
+                                        <span>
+                                            <strong>Late-night eating</strong>
+                                            <small>Helpful if meals or snacks affected your sleep.</small>
+                                        </span>
+                                    </label>
+
+                                    <div class="stepper-grid">
+                                        <div class="stepper-card">
+                                            <div>
+                                                <label for="water-intake">Water intake</label>
+                                                <small>Approximate total for the day.</small>
+                                            </div>
+                                            <div class="stepper-control">
+                                                <button type="button" data-stepper="water-intake" data-step="-1">-</button>
+                                                <strong id="water-intake-value">6</strong>
+                                                <button type="button" data-stepper="water-intake" data-step="1">+</button>
+                                            </div>
+                                            <input id="water-intake" name="waterIntake" type="hidden" value="6">
+                                        </div>
+
+                                        <div class="stepper-card">
+                                            <div>
+                                                <label for="coffee-intake">Coffee intake</label>
+                                                <small>Include coffee or strong caffeine drinks.</small>
+                                            </div>
+                                            <div class="stepper-control">
+                                                <button type="button" data-stepper="coffee-intake" data-step="-1">-</button>
+                                                <strong id="coffee-intake-value">0</strong>
+                                                <button type="button" data-stepper="coffee-intake" data-step="1">+</button>
+                                            </div>
+                                            <input id="coffee-intake" name="coffeeIntake" type="hidden" value="0">
+                                        </div>
+
+                                        <div class="stepper-card">
+                                            <div>
+                                                <label for="alcohol-intake">Alcohol intake</label>
+                                                <small>Helpful if drinks may have affected your sleep.</small>
+                                            </div>
+                                            <div class="stepper-control">
+                                                <button type="button" data-stepper="alcohol-intake" data-step="-1">-</button>
+                                                <strong id="alcohol-intake-value">0</strong>
+                                                <button type="button" data-stepper="alcohol-intake" data-step="1">+</button>
+                                            </div>
+                                            <input id="alcohol-intake" name="alcoholIntake" type="hidden" value="0">
+                                        </div>
+                                    </div>
+
+                                    <div class="field-group">
+                                        <label for="notes">Notes</label>
+                                        <textarea id="notes" name="notes" rows="4" placeholder="Stress, travel, screen time, or anything else you want to remember."></textarea>
+                                        <p class="helper">Notes help future insights feel more personal.</p>
+                                    </div>
+                                </div>
+                            </details>
+                        </section>
+                    </form>
+                </div>
+
+                <div class="floating-action-bar">
+                    <button class="button button-secondary hidden" id="cancel-editing">Cancel</button>
+                    <button class="button button-primary flex-grow" id="save-log">Save Log</button>
+                </div>
+            </section>
+
+            <section class="page" data-page="history">
+                <div class="page-scroll">
+                    <section class="compact-header-card">
+                        <div>
+                            <p class="eyebrow">Sleep journal</p>
+                            <h2>History</h2>
+                            <p>Review past nights, edit mistakes, and remove entries you no longer want to keep.</p>
+                        </div>
+                    </section>
+
+                    <div id="history-list" class="history-list"></div>
+                </div>
+            </section>
+
+            <section class="page" data-page="settings">
+                <div class="page-scroll">
+                    <section class="compact-header-card">
+                        <div>
+                            <p class="eyebrow">Preferences</p>
+                            <h2>Settings</h2>
+                            <p>Save reminder times, request browser notification access, and keep support links close by.</p>
+                        </div>
+                    </section>
+
+                    <section class="glass-card">
+                        <div class="section-heading-row">
+                            <div>
+                                <h2>Reminders</h2>
+                                <p>Browser reminders work best while this page is open.</p>
+                            </div>
+                            <span class="badge" id="notification-status">Off</span>
+                        </div>
+
+                        <div class="split-grid">
+                            <div class="field-panel">
+                                <label for="evening-reminder">Evening reminder</label>
+                                <input id="evening-reminder" type="time">
+                            </div>
+                            <div class="field-panel">
+                                <label for="morning-reminder">Morning reminder</label>
+                                <input id="morning-reminder" type="time">
+                            </div>
+                        </div>
+
+                        <div class="coach-actions">
+                            <button class="button button-primary" id="enable-notifications">Enable Notifications</button>
+                            <button class="button button-secondary" id="save-reminders">Save Reminder Times</button>
+                        </div>
+                        <p class="helper" id="notification-message"></p>
+                    </section>
+
+                    <section class="glass-card">
+                        <div class="section-heading">
+                            <h2>Support & links</h2>
+                            <p>Open the website pages for more details.</p>
+                        </div>
+                        <div class="link-stack">
+                            <a href="./about.html">About</a>
+                            <a href="./privacy-policy.html">Privacy Policy</a>
+                            <a href="./usage.html">Usage</a>
+                            <a href="./terms-and-conditions.html">Terms & Conditions</a>
+                            <a href="mailto:support.chaniiapps@gmail.com">support.chaniiapps@gmail.com</a>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </main>
+
+        <nav class="tabbar" aria-label="App tabs">
+            <button class="tab active" data-tab="overview">Overview</button>
+            <button class="tab" data-tab="log">Log</button>
+            <button class="tab" data-tab="history">History</button>
+            <button class="tab" data-tab="settings">Settings</button>
+        </nav>
+    </div>
+
+    <div class="welcome-overlay hidden" id="welcome-overlay" role="dialog" aria-modal="true">
+        <div class="welcome-card">
+            <div class="welcome-mark" aria-hidden="true"></div>
+            <p class="eyebrow">Welcome</p>
+            <h2>Insomnia Trac</h2>
+            <p class="lead-tight">A calm sleep journal that helps users log nights, spot patterns, and review gentle web-based sleep guidance.</p>
+            <div class="welcome-benefits">
+                <article>
+                    <strong>Log your sleep</strong>
+                    <span>Capture hours, bedtime, wake time, habits, mood, and notes.</span>
+                </article>
+                <article>
+                    <strong>See patterns</strong>
+                    <span>Review trends, history, and recurring routines over time.</span>
+                </article>
+                <article>
+                    <strong>Generate guidance</strong>
+                    <span>Create a short summary based on your recent sleep data.</span>
+                </article>
+            </div>
+            <p class="welcome-disclaimer">Insomnia Trac is a wellness tracking tool. It does not diagnose, treat, or replace professional medical care.</p>
+            <div class="coach-actions">
+                <button class="button button-primary" id="welcome-load-sample">Load Sample Week</button>
+                <button class="button button-secondary" id="welcome-start">Start Tracking</button>
+            </div>
+        </div>
+    </div>
+
+    <template id="history-item-template">
+        <article class="glass-card history-card">
+            <div class="history-top">
+                <div>
+                    <h3 class="history-date"></h3>
+                    <p class="history-hours"></p>
+                </div>
+                <div class="history-actions">
+                    <button class="icon-button history-edit" type="button">Edit</button>
+                    <button class="icon-button history-delete" type="button">Delete</button>
+                </div>
+            </div>
+            <div class="history-pills"></div>
+            <div class="history-activities hidden"></div>
+            <div class="history-notes hidden"></div>
+        </article>
+    </template>
+
+    <script src="./app.js"></script>
+</body>
+</html>
