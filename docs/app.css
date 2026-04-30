@@ -21,6 +21,8 @@
     --radius-md: 16px;
     --radius-sm: 12px;
     --content-width: 1120px;
+    --tabbar-mobile-height: 5.8rem;
+    --floating-action-mobile-offset: 5rem;
 }
 
 * {
@@ -66,7 +68,7 @@ a {
 .app-shell {
     width: min(var(--content-width), calc(100% - 1.5rem));
     margin: 0 auto;
-    padding: max(0.75rem, env(safe-area-inset-top)) 0 calc(6rem + env(safe-area-inset-bottom));
+    padding: max(0.75rem, env(safe-area-inset-top)) 0 calc(var(--tabbar-mobile-height) + 1.5rem + env(safe-area-inset-bottom));
 }
 
 .app-topbar {
@@ -136,6 +138,8 @@ a {
 
 .app-layout {
     position: relative;
+    display: grid;
+    gap: 1rem;
 }
 
 .page {
@@ -153,7 +157,7 @@ a {
 }
 
 .page-scroll-with-action {
-    padding-bottom: 7rem;
+    padding-bottom: calc(var(--tabbar-mobile-height) + 5rem + env(safe-area-inset-bottom));
 }
 
 .overview-background {
@@ -571,7 +575,7 @@ details summary {
 .floating-action-bar {
     position: fixed;
     left: 50%;
-    bottom: calc(4.6rem + env(safe-area-inset-bottom));
+    bottom: calc(var(--floating-action-mobile-offset) + env(safe-area-inset-bottom));
     transform: translateX(-50%);
     width: min(calc(100% - 1rem), var(--content-width));
     padding: 0.9rem 0.5rem 0.35rem;
@@ -675,6 +679,43 @@ details summary {
     color: var(--text);
 }
 
+@media (min-width: 1024px) {
+    .app-shell {
+        padding-bottom: 2rem;
+    }
+
+    .tabbar {
+        position: sticky;
+        top: max(0.75rem, env(safe-area-inset-top));
+        left: auto;
+        bottom: auto;
+        transform: none;
+        width: 100%;
+        margin-bottom: 0.25rem;
+    }
+
+    .page-scroll-with-action {
+        padding-bottom: 2rem;
+    }
+
+    .floating-action-bar {
+        position: sticky;
+        left: auto;
+        bottom: 1rem;
+        transform: none;
+        width: 100%;
+        margin-top: -0.25rem;
+        margin-bottom: 1rem;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        justify-content: flex-end;
+    }
+
+    .floating-action-bar .button {
+        width: auto;
+    }
+}
+
 .welcome-overlay {
     position: fixed;
     inset: 0;
@@ -756,6 +797,12 @@ details summary {
 
     .floating-action-bar {
         width: calc(100% - 0.8rem);
+    }
+}
+
+@media (max-width: 1023px) {
+    .tabbar {
+        z-index: 45;
     }
 }
 
