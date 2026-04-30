@@ -20,7 +20,7 @@
     --radius-lg: 22px;
     --radius-md: 16px;
     --radius-sm: 12px;
-    --content-width: 1120px;
+    --content-width: 1360px;
     --tabbar-mobile-height: 5.8rem;
     --floating-action-mobile-offset: 5rem;
 }
@@ -154,6 +154,10 @@ a {
     display: grid;
     gap: 1rem;
     position: relative;
+}
+
+.page-scroll > * {
+    min-width: 0;
 }
 
 .page-scroll-with-action {
@@ -330,6 +334,57 @@ a {
     color: var(--muted);
     line-height: 1.6;
     font-size: 0.92rem;
+}
+
+@media (min-width: 1180px) {
+    .app-shell {
+        width: min(var(--content-width), calc(100% - 2.5rem));
+    }
+
+    .page[data-page="overview"] .page-scroll {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        align-items: start;
+    }
+
+    .overview-hero,
+    .overview-metrics {
+        grid-column: 1 / -1;
+    }
+
+    .overview-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) auto;
+        gap: 1.1rem;
+        align-items: start;
+    }
+
+    .overview-hero .hero-pills {
+        grid-column: 1 / -1;
+    }
+
+    .overview-history {
+        grid-column: 1 / span 7;
+    }
+
+    .overview-coach {
+        grid-column: 8 / -1;
+        height: 100%;
+    }
+
+    .metric-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .chart-wrap {
+        height: clamp(16rem, 24vw, 22rem);
+    }
+
+    .page[data-page="log"] .page-scroll,
+    .page[data-page="history"] .page-scroll,
+    .page[data-page="settings"] .page-scroll {
+        width: min(100%, 1120px);
+        margin: 0 auto;
+    }
 }
 
 .section-heading,
