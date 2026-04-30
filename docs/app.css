@@ -338,9 +338,32 @@ a {
 
 @media (min-width: 1180px) {
     .app-shell {
-        width: min(var(--content-width), calc(100% - 2.5rem));
+        width: min(1360px, calc(100% - 2.5rem));
         min-height: calc(100vh - 1.5rem);
         padding-top: 1.25rem;
+    }
+
+    .app-topbar {
+        padding: 0.4rem 0 0.9rem;
+    }
+
+    .brand-block {
+        min-width: 240px;
+    }
+
+    .site-links {
+        justify-content: flex-end;
+    }
+
+    .site-links a {
+        padding: 0.72rem 1rem;
+    }
+
+    .tabbar {
+        width: min(780px, 100%);
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0.75rem;
     }
 
     .page[data-page="overview"] .page-scroll {
@@ -356,14 +379,22 @@ a {
 
     .overview-hero {
         display: grid;
-        grid-template-columns: minmax(0, 1.4fr) auto;
+        grid-template-columns: minmax(0, 1.6fr) minmax(220px, 0.55fr);
         gap: 1.1rem;
-        align-items: start;
+        align-items: center;
         padding: 1.55rem 1.6rem;
+    }
+
+    .overview-hero .primary-chip {
+        margin-top: 0;
+        justify-self: end;
+        align-self: start;
+        min-width: 190px;
     }
 
     .overview-hero .hero-pills {
         grid-column: 1 / -1;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .overview-history {
@@ -390,12 +421,43 @@ a {
     .page[data-page="log"] .page-scroll,
     .page[data-page="history"] .page-scroll,
     .page[data-page="settings"] .page-scroll {
-        width: min(100%, 1120px);
+        width: min(100%, 1240px);
         margin: 0 auto;
     }
 
-    .tabbar {
-        margin-bottom: 0.5rem;
+    .page[data-page="log"] .form-stack {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+    }
+
+    .page[data-page="log"] .form-stack > .glass-card:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .page[data-page="history"] .history-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .page[data-page="settings"] .page-scroll {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+    }
+
+    .page[data-page="settings"] .page-scroll > .compact-header-card {
+        grid-column: 1 / -1;
+    }
+
+    .page[data-page="settings"] .page-scroll > .glass-card {
+        min-height: 100%;
+    }
+
+    .glass-card,
+    .compact-header-card {
+        padding: 1.35rem 1.4rem;
+    }
+
+    .history-card {
+        height: 100%;
     }
 }
 
