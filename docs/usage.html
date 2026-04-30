@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usage | Insomnia Trac</title>
+    <meta name="description" content="How to use Insomnia Trac.">
+    <style>
+        :root { --bg-top:#07112b; --bg-bottom:#140c2d; --panel:rgba(17,24,52,.78); --line:rgba(255,255,255,.09); --text:#f4f2ff; --muted:#c7c3e0; --accent-soft:#e7dcff; --shadow:0 28px 60px rgba(3,7,18,.42);}
+        * { box-sizing:border-box; } body { margin:0; font-family:"Avenir Next","Nunito Sans",sans-serif; color:var(--text); background:radial-gradient(circle at 15% 15%, rgba(247,231,188,.12), transparent 26%), radial-gradient(circle at 82% 24%, rgba(184,148,255,.18), transparent 28%), linear-gradient(180deg, var(--bg-top), var(--bg-bottom)); }
+        a { color:inherit; text-decoration:none; } .container { width:min(980px, calc(100% - 2rem)); margin:0 auto; }
+        .topbar { display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:1.25rem 0 .5rem; }
+        .brand { display:flex; align-items:center; gap:.9rem; } .brand-mark { width:3rem; height:3rem; border-radius:18px; background:radial-gradient(circle at 35% 30%, rgba(247,231,188,.95), transparent 25%), linear-gradient(160deg, #3b2c78, #121b50 56%, #07112b);}
+        .brand-copy small { display:block; color:var(--muted); text-transform:uppercase; font-size:.7rem; letter-spacing:.08em; } .brand-copy strong { font-size:1.15rem; }
+        .site-nav { display:flex; flex-wrap:wrap; gap:.65rem; } .site-nav a { padding:.62rem .95rem; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.04); color:var(--muted); font-size:.9rem; } .site-nav a.active { color:var(--text); border-color:rgba(255,255,255,.18); }
+        .hero { padding:2.6rem 0 1.2rem; } .eyebrow { display:inline-flex; padding:.45rem .8rem; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.06); color:var(--accent-soft); font-size:.84rem; }
+        h1 { margin:1rem 0 0; font-size:clamp(2.5rem, 5vw, 4.1rem); line-height:1; } .lead { margin-top:1rem; color:var(--muted); line-height:1.75; max-width:42rem; }
+        .grid { display:grid; gap:1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); padding-bottom:2rem; }
+        .card { background:var(--panel); border:1px solid var(--line); border-radius:24px; padding:1.4rem; box-shadow:var(--shadow); }
+        .card h2 { margin-top:0; } .card p, .card li { color:var(--muted); line-height:1.75; } ol { margin:0; padding-left:1.2rem; }
+        footer { padding:1rem 0 2.5rem; color:rgba(255,255,255,.58); } .footer-links { margin-top:.7rem; display:flex; flex-wrap:wrap; gap:.85rem; }
+        @media (max-width:900px) { .topbar, .grid { flex-direction:column; grid-template-columns:1fr; align-items:flex-start; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="topbar">
+            <a class="brand" href="./index.html"><div class="brand-mark" aria-hidden="true"></div><div class="brand-copy"><small>Sleep wellness app</small><strong>Insomnia Trac</strong></div></a>
+            <nav class="site-nav" aria-label="Primary">
+                <a href="./index.html">Home</a>
+                <a href="./about.html">About</a>
+                <a href="./privacy-policy.html">Privacy Policy</a>
+                <a class="active" href="./usage.html">Usage</a>
+                <a href="./terms-and-conditions.html">Terms & Conditions</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="eyebrow">How to use the app</div>
+            <h1>A simple routine makes the app more useful.</h1>
+            <p class="lead">Insomnia Trac works best when users keep logging light, consistent, and reflective. This page gives a quick guide to the intended product flow.</p>
+        </section>
+
+        <section class="grid">
+            <article class="card">
+                <h2>Recommended flow</h2>
+                <ol>
+                    <li>Open the Log tab and record the night or morning you want to track.</li>
+                    <li>Add core details like sleep hours, bedtime, wake time, and how you felt.</li>
+                    <li>Optionally add routines, notes, caffeine, alcohol, hydration, and related habits.</li>
+                    <li>Review Overview after a few entries to spot patterns and trends.</li>
+                    <li>Generate the AI sleep summary when enough data is available.</li>
+                </ol>
+            </article>
+
+            <article class="card">
+                <h2>Best practices</h2>
+                <p>Short, consistent check-ins are usually more helpful than trying to record every detail perfectly. Users should treat the app as a wellness reflection tool and not as a substitute for professional care.</p>
+                <p>For the best experience, users should check trends over time instead of overreacting to a single night.</p>
+            </article>
+        </section>
+
+        <footer>
+            <div>Insomnia Trac • Sleep wellness tracking with private on-device AI guidance</div>
+            <div class="footer-links">
+                <a href="./index.html">Home</a>
+                <a href="./about.html">About</a>
+                <a href="./privacy-policy.html">Privacy Policy</a>
+                <a href="./terms-and-conditions.html">Terms & Conditions</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
