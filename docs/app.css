@@ -30,6 +30,7 @@
 html, body {
     margin: 0;
     min-height: 100%;
+    overflow-x: hidden;
 }
 
 body {
@@ -63,9 +64,9 @@ a {
 }
 
 .app-shell {
-    width: min(var(--content-width), calc(100% - 1rem));
+    width: min(var(--content-width), calc(100% - 1.5rem));
     margin: 0 auto;
-    padding: 1rem 0 6rem;
+    padding: max(0.75rem, env(safe-area-inset-top)) 0 calc(6rem + env(safe-area-inset-bottom));
 }
 
 .app-topbar {
@@ -73,6 +74,7 @@ a {
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+    flex-wrap: wrap;
     padding: 0.75rem 0 1rem;
 }
 
@@ -129,6 +131,7 @@ a {
     background: rgba(255, 255, 255, 0.04);
     color: var(--muted);
     font-size: 0.9rem;
+    text-align: center;
 }
 
 .app-layout {
@@ -363,7 +366,7 @@ a {
 }
 
 .chart-wrap {
-    height: 15rem;
+    height: clamp(12rem, 32vw, 15rem);
     border-radius: 18px;
     background:
         linear-gradient(180deg, rgba(184, 148, 255, 0.18), rgba(184, 148, 255, 0.03)),
@@ -401,6 +404,7 @@ a {
     padding: 0.9rem 1.15rem;
     font-weight: 700;
     color: var(--text);
+    min-width: 0;
 }
 
 .button-primary {
@@ -471,6 +475,13 @@ input[type="text"] {
     padding: 0.82rem 0.9rem;
 }
 
+select,
+input,
+textarea,
+button {
+    max-width: 100%;
+}
+
 textarea {
     resize: vertical;
 }
@@ -534,7 +545,7 @@ details summary {
 }
 
 .stepper-grid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 .stepper-card {
@@ -560,7 +571,7 @@ details summary {
 .floating-action-bar {
     position: fixed;
     left: 50%;
-    bottom: 4.6rem;
+    bottom: calc(4.6rem + env(safe-area-inset-bottom));
     transform: translateX(-50%);
     width: min(calc(100% - 1rem), var(--content-width));
     padding: 0.9rem 0.5rem 0.35rem;
@@ -584,6 +595,7 @@ details summary {
 .history-actions {
     display: flex;
     gap: 0.55rem;
+    flex-wrap: wrap;
 }
 
 .icon-button {
@@ -601,7 +613,7 @@ details summary {
 
 .history-pills {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
     gap: 0.7rem;
     margin-top: 0.9rem;
 }
@@ -635,7 +647,7 @@ details summary {
 .tabbar {
     position: fixed;
     left: 50%;
-    bottom: 0.8rem;
+    bottom: calc(0.8rem + env(safe-area-inset-bottom));
     transform: translateX(-50%);
     width: min(calc(100% - 1rem), 720px);
     display: grid;
@@ -676,6 +688,8 @@ details summary {
 
 .welcome-card {
     width: min(700px, 100%);
+    max-height: min(90vh, 820px);
+    overflow: auto;
     border-radius: 28px;
     border: 1px solid var(--line);
     background: linear-gradient(180deg, rgba(14, 23, 55, 0.96), rgba(29, 20, 63, 0.94));
@@ -697,7 +711,7 @@ details summary {
 .welcome-benefits {
     display: grid;
     gap: 0.85rem;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     margin: 1.2rem 0;
 }
 
@@ -735,7 +749,6 @@ details summary {
 
     .metric-grid,
     .split-grid,
-    .history-pills,
     .hero-pills,
     .welcome-benefits {
         grid-template-columns: 1fr;
@@ -743,6 +756,35 @@ details summary {
 
     .floating-action-bar {
         width: calc(100% - 0.8rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-card,
+    .glass-card,
+    .compact-header-card,
+    .welcome-card {
+        padding: 1.1rem;
+    }
+
+    .field-inline,
+    .slider-row,
+    .history-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .history-actions {
+        width: 100%;
+    }
+
+    .history-actions .icon-button {
+        flex: 1;
+    }
+
+    .stepper-control {
+        width: 100%;
+        justify-content: space-between;
     }
 }
 
@@ -769,11 +811,73 @@ details summary {
     }
 
     .floating-action-bar {
-        bottom: 5.5rem;
+        bottom: calc(5.5rem + env(safe-area-inset-bottom));
     }
 
     .tabbar {
         width: calc(100% - 0.8rem);
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 560px) {
+    .app-shell {
+        width: calc(100% - 0.6rem);
+    }
+
+    .brand-block {
+        width: 100%;
+    }
+
+    .site-links {
+        grid-template-columns: 1fr;
+    }
+
+    .field-inline-grid,
+    .coach-actions,
+    .floating-action-bar {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .button,
+    .primary-chip,
+    .icon-button,
+    .tab {
+        width: 100%;
+    }
+
+    .tabbar {
+        gap: 0.4rem;
+        padding: 0.45rem;
+    }
+
+    .tab {
+        padding: 0.75rem 0.55rem;
+        font-size: 0.92rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .app-shell {
+        width: calc(100% - 0.4rem);
+    }
+
+    .hero-card,
+    .glass-card,
+    .compact-header-card,
+    .welcome-card {
+        border-radius: 18px;
+        padding: 1rem 0.9rem;
+    }
+
+    .eyebrow {
+        font-size: 0.76rem;
+    }
+
+    .history-pills,
+    .stepper-grid,
+    .activity-grid {
+        grid-template-columns: 1fr;
     }
 }
